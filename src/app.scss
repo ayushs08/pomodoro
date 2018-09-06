@@ -1,0 +1,81 @@
+@import url("https://fonts.googleapis.com/css?family=Oswald:200,300,400,500,600,700");
+
+body, html {
+  margin: 0;
+  height: 100%;
+  font-family: "Oswald", sans-serif;
+  font-size: 10px;
+}
+* {
+  box-sizing: border-box;
+}
+body {
+  background: #242424;
+}
+.logo {
+  width: 6rem;
+  position: fixed;
+  top: 2rem;
+  left: 2rem;
+}
+.time {
+  height: 85vh;
+  overflow: hidden;
+  font-size: 36vw;
+  color: white;
+  opacity: 0.1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .colon, .sec {
+    opacity: 0.3;
+  }
+}
+.controls {
+  height: 15vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.control {
+  color: white;
+  font-size: 3vw;
+  opacity: 0.08;
+  margin-right: 4rem;
+  transition: all 0.4s;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.5;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
+  &.play:hover {
+    color: #2ecc71;
+  }
+  &.pause:hover {
+    color: #f1c40f;
+  }
+  &.stop:hover {
+    color: #e74c3c;
+  }
+  &.code:hover {
+    color: #3498db;
+  }
+}
+@media(max-width: 992px) {
+  .time {
+    flex-direction: column;
+    height: 82vh;
+    font-size: 60vw;
+    .min, .sec {
+      line-height: 25rem;
+    }
+  }
+  .controls {
+    height: 10vh;
+  }
+  .control {
+    font-size: 8vw;
+  }
+}
