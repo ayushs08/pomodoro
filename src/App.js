@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+
 import './app.css';
 
 class App extends Component {
@@ -78,10 +79,10 @@ class App extends Component {
           <div className="play control" onClick={this.play}><i className="fal fa-play"></i></div>
           <div className="pause control" onClick={this.pause}><i className="fal fa-pause"></i></div>
           <div className="stop control" onClick={this.stop}><i className="fal fa-stop"></i></div>
-          <div className="code control"><a href="https://github.com/ayushs08/pomodoro" className="fal fa-code"></a></div>
+          <a href="https://github.com/ayushs08/pomodoro" className="code control"><i className="fal fa-code"></i></a>
           <div className="settings control" onClick={() => this.showModal(true)}><i className="fal fa-cog"></i></div>
         </div>
-        { this.state.showModal && (<div className={`settings-panel hidden`}>
+        <div className={`settings-panel ${this.state.showModal ? '' : 'hidden'}`}>
           <div className="header">
             <div className="helper">Changes will be saved</div>
             <i className="fal fa-times close" onClick={() => this.showModal(false)}></i>
@@ -96,7 +97,7 @@ class App extends Component {
               <label htmlFor="break">Break minutes</label>
             </div>
           </div>
-        </div>)}
+        </div>
       </div>
     )
   }
