@@ -3,14 +3,49 @@ import './app.css';
 
 class App extends Component {
   state = {
-    work: {
-      min: 25,
-      sec: 8
-    },
-    break: {
-      min: 5,
-      sec: 60
+    work: 25,
+    break: 5,
+    seconds: 0,
+    isBreak: false,
+    interval: null
+  }
+
+  play = () => {
+    this.setState({
+      seconds: this.state.seconds - 1,
+      interval: setInterval(() => {
+                  this.setState({seconds: this.state.seconds - 1}, function() {
+                    if(this.state.seconds < 0) {
+                      this.setState({work: this.state.work - 1, seconds: 59})
+                    }
+                  })
+                }, 1000)
+    }, function() {
+      if(this.state.seconds < 0) {
+        this.setState({work: this.state.work - 1, seconds: 59})
+      }
+    })
+    
+  }
+
+  pause = () => {
+    clearInterval(this.state.interval)
+  }
+
+  stop = () => {
+    clearInterval(this.state.interval)
+    this.setState({
+      work: 25,
+      seconds: 0,
+      interval: null
+    })
+  }
+
+  formatTime = (time) => {
+    if(time < 10) {
+      return "0"+time
     }
+    return time
   }
 
   render() {
@@ -18,20 +53,16 @@ class App extends Component {
       <div className="App">
         <div className="time">
           <div className="min">
-            {
-              this.state.work.min < 10 ? "0"+this.state.work.min : this.state.work.min
-            }
+            {this.state.isBreak ? this.formatTime(this.state.break) : this.formatTime(this.state.work)}
           </div>
           <div className="sec">:
-            {
-              this.state.work.sec < 10 ? "0"+this.state.work.sec : this.state.work.sec
-            }
+            {this.formatTime(this.state.seconds)}
           </div>
         </div>
         <div className="controls">
-          <div className="play control" onClick={this.check}><i className="fal fa-play"></i></div>
-          <div className="pause control"><i className="fal fa-pause"></i></div>
-          <div className="stop control" onClick={this.reset}><i className="fal fa-stop"></i></div>
+          <div className="play control" onClick={this.play}><i className="fal fa-play"></i></div>
+          <div className="pause control" onClick={this.pause}><i className="fal fa-pause"></i></div>
+          <div className="stop control" onClick={this.stop}><i className="fal fa-stop"></i></div>
           <div className="code control"><i className="fal fa-code"></i></div>
           <div className="settings control"><i className="fal fa-cog"></i></div>
         </div>

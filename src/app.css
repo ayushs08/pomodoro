@@ -18,7 +18,7 @@ body {
   left: 2rem; }
 
 .time {
-  height: 85vh;
+  height: 86vh;
   overflow: hidden;
   font-size: 36vw;
   color: white;
@@ -31,14 +31,14 @@ body {
   opacity: 0.3; }
 
 .controls {
-  height: 15vh;
+  height: 14vh;
   display: flex;
   justify-content: center;
   align-items: center; }
 
 .control {
   color: white;
-  font-size: 3vw;
+  font-size: 2.5vw;
   opacity: 0.08;
   margin-right: 4rem;
   transition: all 0.4s;
