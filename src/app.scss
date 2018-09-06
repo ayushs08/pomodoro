@@ -63,8 +63,11 @@ body {
   &.stop:hover, &.stop.active {
     color: #e74c3c;
   }
-  &.code:hover, &.code.active {
+  &.fast-forward:hover, &.fast-forward.active {
     color: #3498db;
+  }
+  &.misc:hover, &.misc.active {
+    color: #EC407A;
   }
 }
 .settings-panel {

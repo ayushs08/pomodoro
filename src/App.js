@@ -2,10 +2,15 @@ import React, { Component } from 'react';
 
 import './app.css';
 
+const timer = {
+  work: 25,
+  break: 5
+}
+
 class App extends Component {
   state = {
-    work: 25,
-    break: 5,
+    work: timer.work,
+    break: timer.break,
     seconds: 0,
     isBreak: false,
     interval: null,
@@ -15,18 +20,13 @@ class App extends Component {
   play = () => {
     this.clearActive('.play')
     this.setState({
-      seconds: this.state.seconds - 1,
       interval: setInterval(() => {
                   this.setState({seconds: this.state.seconds - 1}, function() {
                     if(this.state.seconds < 0) {
-                      this.setState({work: this.state.work - 1, seconds: 59})
+                      this.state.isBreak ? this.setState({break: this.state.break - 1, seconds: 59}) : this.setState({work: this.state.work - 1, seconds: 59})
                     }
                   })
                 }, 1000)
-    }, function() {
-      if(this.state.seconds < 0) {
-        this.setState({work: this.state.work - 1, seconds: 59})
-      }
     })
     
   }
@@ -40,10 +40,17 @@ class App extends Component {
     this.clearActive('.stop')
     clearInterval(this.state.interval)
     this.setState({
-      work: 25,
+      work: timer.work,
+      break: timer.break,
       seconds: 0,
       interval: null
     })
+  }
+
+  fastForward = () => {
+    clearInterval(this.state.interval)
+    this.clearActive('.fast-forward')
+    this.setState({isBreak: !this.state.isBreak, seconds: 0, work: timer.work, break: timer.break})
   }
 
   formatTime = (time) => {
@@ -61,6 +68,7 @@ class App extends Component {
   }
 
   showModal = (bool) => {
+    this.clearActive(bool ? '.settings' : '')
     this.setState({showModal: bool})
   }
 
@@ -76,11 +84,12 @@ class App extends Component {
           </div>
         </div>
         <div className="controls">
+          <a href="https://github.com/ayushs08/pomodoro" className="code control misc"><i className="fal fa-code"></i></a>
           <div className="play control" onClick={this.play}><i className="fal fa-play"></i></div>
           <div className="pause control" onClick={this.pause}><i className="fal fa-pause"></i></div>
           <div className="stop control" onClick={this.stop}><i className="fal fa-stop"></i></div>
-          <a href="https://github.com/ayushs08/pomodoro" className="code control"><i className="fal fa-code"></i></a>
-          <div className="settings control" onClick={() => this.showModal(true)}><i className="fal fa-cog"></i></div>
+          <div className="fast-forward control" onClick={this.fastForward}><i className="fal fa-fast-forward"></i></div>
+          <div className="settings control misc" onClick={() => this.showModal(true)}><i className="fal fa-cog"></i></div>
         </div>
         <div className={`settings-panel ${this.state.showModal ? '' : 'hidden'}`}>
           <div className="header">
