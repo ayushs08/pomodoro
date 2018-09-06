@@ -50,6 +50,10 @@ body {
 .control:last-child {
   margin-right: 0; }
 
+.control a {
+  color: inherit;
+  text-decoration: none; }
+
 .control.play:hover, .control.play.active {
   color: #2ecc71; }
 
@@ -61,6 +65,30 @@ body {
 
 .control.code:hover, .control.code.active {
   color: #3498db; }
+
+.settings-panel {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-height: 50vh;
+  width: 60vw;
+  padding: 1rem;
+  background: rgba(0, 0, 0, 0.6); }
+
+.settings-panel .header {
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  font-size: 1.8rem;
+  color: white;
+  opacity: 0.6;
+  font-weight: 100; }
+
+.settings-panel .header .close {
+  margin: 0 1rem;
+  line-height: 2.2rem;
+  cursor: pointer; }
 
 @media (max-width: 992px) {
   .time {

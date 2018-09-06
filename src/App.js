@@ -73,8 +73,15 @@ class App extends Component {
           <div className="play control" onClick={this.play}><i className="fal fa-play"></i></div>
           <div className="pause control" onClick={this.pause}><i className="fal fa-pause"></i></div>
           <div className="stop control" onClick={this.stop}><i className="fal fa-stop"></i></div>
-          <div className="code control"><i className="fal fa-code"></i></div>
+          <div className="code control"><a href="https://github.com/ayushs08/pomodoro" className="fal fa-code"></a></div>
           <div className="settings control"><i className="fal fa-cog"></i></div>
+        </div>
+        <div className="settings-panel">
+          <div className="header">
+            <div className="helper">Changes will be saved</div>
+            <i className="fal fa-times close"></i>
+          </div>
+          <div className="body"></div>
         </div>
       </div>
     )
