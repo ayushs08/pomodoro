@@ -55,7 +55,7 @@ class App extends Component {
     document.querySelectorAll('.control').forEach( control => {
       control.classList.remove('active')
     })
-    document.querySelector(control).classList.add('active')
+    control && document.querySelector(control).classList.add('active')
   }
 
   render() {
@@ -81,7 +81,16 @@ class App extends Component {
             <div className="helper">Changes will be saved</div>
             <i className="fal fa-times close"></i>
           </div>
-          <div className="body"></div>
+          <div className="body">
+            <div className="form-group">
+              <input type="number" required id="work" />
+              <label htmlFor="work">Work minutes</label>
+            </div>
+            <div className="form-group">
+              <input type="number" required id="break" />
+              <label htmlFor="break">Break minutes</label>
+            </div>
+          </div>
         </div>
       </div>
     )

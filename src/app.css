@@ -71,10 +71,9 @@ body {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  min-height: 50vh;
-  width: 60vw;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.6); }
+  padding: 2rem;
+  background: rgba(0, 0, 0, 0.8);
+  box-shadow: 0px 12px 8px -8px rgba(0, 0, 0, 0.5); }
 
 .settings-panel .header {
   display: flex;
@@ -86,9 +85,66 @@ body {
   font-weight: 100; }
 
 .settings-panel .header .close {
-  margin: 0 1rem;
-  line-height: 2.2rem;
+  margin-left: 1.5rem;
+  font-size: 3rem;
+  line-height: 2.4rem;
   cursor: pointer; }
+
+.settings-panel .body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6rem 8rem; }
+
+.settings-panel .form-group {
+  position: relative;
+  font-size: 4rem;
+  margin-bottom: 6rem; }
+
+.settings-panel .form-group:last-child {
+  margin-bottom: 0; }
+
+.settings-panel .form-group input {
+  background: none;
+  border: none;
+  border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+  font-size: 4rem;
+  color: white;
+  opacity: 0.8;
+  font-family: "Oswald";
+  font-weight: 200;
+  text-align: center; }
+
+.settings-panel .form-group input:focus {
+  outline: none;
+  border-color: rgba(255, 255, 255, 0.5); }
+
+.settings-panel .form-group input:focus + label {
+  opacity: 0.5; }
+
+.settings-panel .form-group input:focus + label, .settings-panel .form-group input:valid + label {
+  font-size: 80%;
+  transform: translateY(-120%); }
+
+.settings-panel .form-group label {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  text-align: center;
+  font-weight: 100;
+  transition: all 0.4s;
+  color: white;
+  opacity: 0.2; }
+
+input[type='number'] {
+  -moz-appearance: textfield; }
+
+/* Webkit browsers like Safari and Chrome */
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0; }
 
 @media (max-width: 992px) {
   .time {
@@ -100,4 +156,13 @@ body {
   .controls {
     height: 10vh; }
   .control {
+    font-size: 8vw; }
+  .settings-panel {
+    width: 90vw;
+    padding: 1rem; }
+  .settings-panel .form-group {
+    width: 100%;
+    font-size: 8vw; }
+  .settings-panel .form-group input {
+    width: 100%;
     font-size: 8vw; } }
