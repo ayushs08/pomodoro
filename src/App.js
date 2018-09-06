@@ -7,7 +7,8 @@ class App extends Component {
     break: 5,
     seconds: 0,
     isBreak: false,
-    interval: null
+    interval: null,
+    showModal: false
   }
 
   play = () => {
@@ -58,6 +59,10 @@ class App extends Component {
     control && document.querySelector(control).classList.add('active')
   }
 
+  showModal = (bool) => {
+    this.setState({showModal: bool})
+  }
+
   render() {
     return (
       <div className="App">
@@ -74,12 +79,12 @@ class App extends Component {
           <div className="pause control" onClick={this.pause}><i className="fal fa-pause"></i></div>
           <div className="stop control" onClick={this.stop}><i className="fal fa-stop"></i></div>
           <div className="code control"><a href="https://github.com/ayushs08/pomodoro" className="fal fa-code"></a></div>
-          <div className="settings control"><i className="fal fa-cog"></i></div>
+          <div className="settings control" onClick={() => this.showModal(true)}><i className="fal fa-cog"></i></div>
         </div>
-        <div className="settings-panel">
+        { this.state.showModal && (<div className={`settings-panel hidden`}>
           <div className="header">
             <div className="helper">Changes will be saved</div>
-            <i className="fal fa-times close"></i>
+            <i className="fal fa-times close" onClick={() => this.showModal(false)}></i>
           </div>
           <div className="body">
             <div className="form-group">
@@ -91,7 +96,7 @@ class App extends Component {
               <label htmlFor="break">Break minutes</label>
             </div>
           </div>
-        </div>
+        </div>)}
       </div>
     )
   }
