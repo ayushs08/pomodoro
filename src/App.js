@@ -2,24 +2,24 @@ import React, { Component } from 'react';
 
 import './app.css';
 
-const timer = {
-  work: 25,
-  break: 5
-}
-
 class App extends Component {
   state = {
-    work: timer.work,
-    break: timer.break,
+    work: 25,
+    break: 5,
     seconds: 0,
     isBreak: false,
     interval: null,
-    showModal: false
+    showModal: false,
+    settings: {
+      work: 25,
+      break: 5
+    }
   }
 
   play = () => {
     this.clearActive('.play')
     this.setState({
+      showModal: false,
       interval: setInterval(() => {
                   this.setState({seconds: this.state.seconds - 1}, function() {
                     if(this.state.seconds < 0) {
@@ -32,6 +32,7 @@ class App extends Component {
   }
 
   pause = () => {
+    this.setState({showModal: false})
     this.clearActive('.pause')
     clearInterval(this.state.interval)
   }
@@ -40,17 +41,18 @@ class App extends Component {
     this.clearActive('.stop')
     clearInterval(this.state.interval)
     this.setState({
-      work: timer.work,
-      break: timer.break,
+      work: this.state.settings.work,
+      break: this.state.settings.break,
       seconds: 0,
-      interval: null
+      interval: null,
+      showModal: false
     })
   }
 
   fastForward = () => {
     clearInterval(this.state.interval)
     this.clearActive('.fast-forward')
-    this.setState({isBreak: !this.state.isBreak, seconds: 0, work: timer.work, break: timer.break})
+    this.setState({isBreak: !this.state.isBreak, seconds: 0, work: this.state.settings.work, break: this.state.settings.break})
   }
 
   formatTime = (time) => {
@@ -69,6 +71,32 @@ class App extends Component {
 
   showModal = (bool) => {
     this.clearActive(bool ? '.settings' : '')
+    const settings = {
+      work: document.getElementById('work').value,
+      break: document.getElementById('break').value
+    }
+    if(!bool) {
+      if(settings.work && !settings.break) {
+        this.setState({
+          work: settings.work,
+          seconds: 0,
+          settings:{work: settings.work, break: this.state.settings.break}
+        }, () => clearInterval(this.state.interval))
+      } else if(!settings.work && settings.break) {
+        this.setState({
+          break: settings.break,
+          seconds: 0,
+          settings:{work: this.state.settings.work, break: settings.break}
+        }, () => clearInterval(this.state.interval))
+      } else if(settings.work && settings.break) {
+        this.setState({
+          work: settings.break,
+          break: settings.break,
+          seconds: 0,
+          settings:{work: settings.work, break: settings.break}
+        }, () => clearInterval(this.state.interval))
+      }
+    }
     this.setState({showModal: bool})
   }
 
@@ -84,7 +112,7 @@ class App extends Component {
           </div>
         </div>
         <div className="controls">
-          <a href="https://github.com/ayushs08/pomodoro" className="code control misc"><i className="fal fa-code"></i></a>
+          <a href="https://github.com/ayushs08/pomodoro" target="_blank" className="code control misc"><i className="fal fa-code"></i></a>
           <div className="play control" onClick={this.play}><i className="fal fa-play"></i></div>
           <div className="pause control" onClick={this.pause}><i className="fal fa-pause"></i></div>
           <div className="stop control" onClick={this.stop}><i className="fal fa-stop"></i></div>
