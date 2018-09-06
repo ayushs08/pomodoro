@@ -44,22 +44,22 @@ body {
   margin-right: 4rem;
   transition: all 0.4s;
   cursor: pointer;
-  &:hover {
+  &:hover, &.active {
     opacity: 0.5;
   }
   &:last-child {
     margin-right: 0;
   }
-  &.play:hover {
+  &.play:hover, &.play.active {
     color: #2ecc71;
   }
-  &.pause:hover {
+  &.pause:hover, &.pause.active {
     color: #f1c40f;
   }
-  &.stop:hover {
+  &.stop:hover, &.stop.active {
     color: #e74c3c;
   }
-  &.code:hover {
+  &.code:hover, &.code.active {
     color: #3498db;
   }
 }

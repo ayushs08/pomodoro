@@ -11,6 +11,7 @@ class App extends Component {
   }
 
   play = () => {
+    this.clearActive('.play')
     this.setState({
       seconds: this.state.seconds - 1,
       interval: setInterval(() => {
@@ -29,10 +30,12 @@ class App extends Component {
   }
 
   pause = () => {
+    this.clearActive('.pause')
     clearInterval(this.state.interval)
   }
 
   stop = () => {
+    this.clearActive('.stop')
     clearInterval(this.state.interval)
     this.setState({
       work: 25,
@@ -46,6 +49,13 @@ class App extends Component {
       return "0"+time
     }
     return time
+  }
+
+  clearActive = (control) => {
+    document.querySelectorAll('.control').forEach( control => {
+      control.classList.remove('active')
+    })
+    document.querySelector(control).classList.add('active')
   }
 
   render() {

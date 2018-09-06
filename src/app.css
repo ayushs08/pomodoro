@@ -44,22 +44,22 @@ body {
   transition: all 0.4s;
   cursor: pointer; }
 
-.control:hover {
+.control:hover, .control.active {
   opacity: 0.5; }
 
 .control:last-child {
   margin-right: 0; }
 
-.control.play:hover {
+.control.play:hover, .control.play.active {
   color: #2ecc71; }
 
-.control.pause:hover {
+.control.pause:hover, .control.pause.active {
   color: #f1c40f; }
 
-.control.stop:hover {
+.control.stop:hover, .control.stop.active {
   color: #e74c3c; }
 
-.control.code:hover {
+.control.code:hover, .control.code.active {
   color: #3498db; }
 
 @media (max-width: 992px) {
