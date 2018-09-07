@@ -23,12 +23,22 @@ class App extends Component {
       interval: setInterval(() => {
                   this.setState({seconds: this.state.seconds - 1}, function() {
                     if(this.state.seconds < 0) {
-                      this.state.isBreak ? this.setState({break: this.state.break - 1, seconds: 59}) : this.setState({work: this.state.work - 1, seconds: 59})
+                      this.state.isBreak ? 
+                        this.setState({break: this.state.break - 1, seconds: 59}, this.toggle) : 
+                        this.setState({work: this.state.work - 1, seconds: 59}, this.toggle)
                     }
                   })
                 }, 1000)
     })
     
+  }
+
+  toggle = () => {
+    if(this.state.work < 0 || this.state.break < 0) {
+      clearInterval(this.state.interval)
+      this.clearActive()
+      this.setState({isBreak: !this.state.isBreak, seconds: 0, work: this.state.settings.work, break: this.state.settings.break})
+    }
   }
 
   pause = () => {
@@ -90,7 +100,7 @@ class App extends Component {
         }, () => clearInterval(this.state.interval))
       } else if(settings.work && settings.break) {
         this.setState({
-          work: settings.break,
+          work: settings.work,
           break: settings.break,
           seconds: 0,
           settings:{work: settings.work, break: settings.break}
@@ -121,7 +131,6 @@ class App extends Component {
         </div>
         <div className={`settings-panel ${this.state.showModal ? '' : 'hidden'}`}>
           <div className="header">
-            <div className="helper">Changes will be saved</div>
             <i className="fal fa-times close" onClick={() => this.showModal(false)}></i>
           </div>
           <div className="body">
